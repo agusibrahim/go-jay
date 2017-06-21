@@ -13,7 +13,7 @@ Dari beberapa transportasi online yang banyak berseliweran, Ojek atau angkutan y
 Namun bagaimana dengan bajaj (bajay) ? Transportasi umum roda tiga ini acap kali di sepelekan, ntah karena bising atau efek goyang-goyang saya tidak tahu, yang jelas saya sendiri belum pernah merasakan sensasi menumpanginya. lah?
 Kelebihan kedaraan roda tiga ini disamping bisa muat sekitar 3 sampai 10 penumpang, juga bisa menyelip ke gang sempit, menerobos kemacetan, masuk jalur Busway, dan berjalan mundur, eh..
 
-Bajay online rasanya sudah ada, namun jika dilihat di Google Play Store, User Interface dari aplikasinya sangat tidak niat, okelah mungkin Screenshot menggunakan versi lawas. Namun semakin miris setelah saya melihat feedbacknya. lupakan itu..
+Bajay online rasanya sudah ada, namun jika dilihat di Google Play Store, User Interface dari aplikasinya sangat tidak niat, okelah mungkin Screenshot menggunakan versi lawas. lupakan itu..
 
 Bagaimana dengan GO-JAY?
 
