@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<color name="colorPrimaryDark">#0097A7</color> <!-- [ TEAL - 800 ] -->
+	<color name="colorPrimary">#0097A7</color> <!-- [ TEAL - 800 ] -->
+	<color name="colorPrimaryLight">#00BCD4</color> <!-- [ TEAL - 100 ] -->
+	<color name="colorAccent">#048493</color> <!-- [ PINK - A400 ] -->
+	<color name="textColorPrimary">#212121</color>
+	<color name="textColorSecondary">#727272</color>
+
+	<color name="text">#FFFFFF</color>
+	<color name="icons">#FFFFFF</color>
+	<color name="divider">#B6B6B6</color>
+
+	<color name="colorControlNormal">@color/textColorSecondary</color>
+	<color name="colorControlActivated">@color/colorAccent</color>
+	<color name="colorControlHighlight">@color/divider</color>
+
+	<!--
+	<color name="colorButtonNormal">#19C1B2</color>
+	<color name="colorSwitchThumbNormal">#19C1B2</color>
+	<color name="navigationBarColor">@color/colorPrimaryDark</color>
+	-->
+
+	<color name="windowBackground">#C0C3C6</color>
+	<color name="lightBackground">#E0E0E0</color>
+	<color name="darkBackground">#424242</color>
+	<color name="drawerBackground">#FFfafafa</color>
+	<color name="rowBackground">#F2F2F2</color>
+
+	<color name="colorAddrStart">#E61C68</color>
+	<color name="colorAddrStartPressed">#CC1B5E</color>
+	<color name="colorAddrEnd">#127399</color>
+	<color name="colorAddrEndPressed">#126283</color>
+</resources>

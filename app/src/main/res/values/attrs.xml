@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ValueTip">
+        <attr name="radius" format="dimension" />
+		<attr name="text" format="string" />
+		<attr name="colorNormal" format="color" />
+		<attr name="colorPressed" format="color" />
+		<attr name="paddingHorizontal" format="dimension" />
+		<attr name="paddingVertical" format="dimension" />
+	</declare-styleable>
+</resources>

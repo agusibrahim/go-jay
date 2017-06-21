@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.1.0"
+
+    defaultConfig {
+        applicationId "ai.agusibrahim.brojekdemo"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+	compile 'com.google.android.gms:play-services-location:+'
+	compile 'com.jakewharton.scalpel:scalpel:1.1.2'
+	compile 'cat.ereza:customactivityoncrash:1.5.0'
+	compile 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:2.1.0'
+	compile 'com.google.android.gms:play-services-places:9.8.0'
+	compile 'com.android.support:design:25.1.1'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
