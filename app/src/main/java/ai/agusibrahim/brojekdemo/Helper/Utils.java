@@ -102,7 +102,7 @@ public class Utils {
     private static double rad2deg(double rad) {
 		return (rad * 180.0 / Math.PI);
     }
-	// Camera correction by Agus Ibrahik
+	// Camera correction by Agus Ibrahim
 	private static void cameraCorrection(final Context ctx, final GoogleMap gmap, final LatLng start, final LatLng end, final int padding) {
 		GoogleMap.CancelableCallback cameraOnFinish=new GoogleMap.CancelableCallback(){
 			@Override

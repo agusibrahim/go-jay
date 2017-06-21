@@ -10,10 +10,10 @@ Mengandalkan peta digital dari Google, membuat aplikasi mereka semakin interakti
 # Memperkenalkan GO-JAY
 Dari beberapa transportasi online yang banyak berseliweran, Ojek atau angkutan yang menggunakan sepeda motor menjadi golongan yang terbanyak ketimbang mobil, heli dan jet.
 
-Namun bagaimana dengan bajaj (bajay) ? Transportasi umum roda tiga ini acap kali di sepelekan, ntah karena bising atau goyang-goyang saya tidak tahu, yang jelas saya sendiri belum pernah merasakan sensasi menumpanginya. lah?
-Kelebihan kedaraan roda tiga ini disamping bisa muat sekitar 2 sampai 3 penumpang, juga bisa menyelip ke gang sempit, menerobos kemacetan, masuk jalur Busway, dan berjalan mundur, eh..
+Namun bagaimana dengan bajaj (bajay) ? Transportasi umum roda tiga ini acap kali di sepelekan, ntah karena bising atau efek goyang-goyang saya tidak tahu, yang jelas saya sendiri belum pernah merasakan sensasi menumpanginya. lah?
+Kelebihan kedaraan roda tiga ini disamping bisa muat sekitar 3 sampai 10 penumpang, juga bisa menyelip ke gang sempit, menerobos kemacetan, masuk jalur Busway, dan berjalan mundur, eh..
 
-Bajay online rasanya sudah ada, namun jika dilihat di Google Play Store, User Interface dari aplikasinya sangat tidak niat, okelah mungkin mungkin cuma di Screenshot. Namun semakin miris setelah saya melihat feedbacknya. lupakan itu..
+Bajay online rasanya sudah ada, namun jika dilihat di Google Play Store, User Interface dari aplikasinya sangat tidak niat, okelah mungkin Screenshot menggunakan versi lawas. Namun semakin miris setelah saya melihat feedbacknya. lupakan itu..
 
 Bagaimana dengan GO-JAY?
 
@@ -39,7 +39,7 @@ Tampil profesional dengan koordinasi animasi yang keren. Diharapkan pengguna bis
 ### Edit Lokasi
 <img src="https://github.com/agusibrahim/go-jay/blob/master/img/editlokasi.gif" width="300">
 
-Edit Lokasi jemput maupun lokasi tujuan
+> Edit Lokasi jemput maupun lokasi tujuan
 
 ### Kamera Pintar
 <img src="https://github.com/agusibrahim/go-jay/blob/master/img/autocorrect.gif" width="300">
@@ -61,7 +61,7 @@ Tentu masih banyak lagi yang harus ditambah dan bahkan dibenahi dari GO-JAY. Yan
 ## ATENTION for Android Studio Users
 Karena ini dibuat tanpa Android Studio, jadi perlu penyesuaian jika terjadi project error. GO-JAY dibuat menggunakan [AIDE](https://play.google.com/store/apps/details?id=com.aide.ui) di ponsel Android langsung, tanpa Laptop/PC.
 
-Punya ide hebat atau kerja sama? [Contact Me](http://telegram.me/agusibrahim)
+Punya ide gila atau ingin menjalin kerja sama? [Contact Me](http://telegram.me/agusibrahim)
 * [Agus Ibrahim](http://fb.me/mynameisagoes)
 
 <img src="https://i1.sndcdn.com/artworks-000220944135-hb3nko-t500x500.jpg" width="300">
