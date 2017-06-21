@@ -58,6 +58,8 @@ Tentu masih banyak lagi yang harus ditambah dan bahkan dibenahi dari GO-JAY. Yan
 Punya ide hebat atau kerja sama? [Contact Me](http://telegram.me/agusibrahim)
 * [Agus Ibrahim](http://fb.me/mynameisagoes)
 
+<img src="https://i1.sndcdn.com/artworks-000220944135-hb3nko-t500x500.jpg" width="300">
+
 ## Credits
 * https://github.com/Ereza/CustomActivityOnCrash
 * https://github.com/yshrsmz/KeyboardVisibilityEvent
