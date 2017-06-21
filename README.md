@@ -8,6 +8,7 @@ Mengandalkan peta digital dari Google, membuat aplikasi mereka semakin interakti
 Dari beberapa transportasi online yang banyak berseliweran, Ojek atau angkutan yang menggunakan sepeda motor menjadi golongan yang terbanyak ketimbang mobil, heli dan jet.
 
 Namun bagaimana dengan bajaj (bajay) ? Transportasi umum roda tiga ini acap kali di sepelekan, ntah karena bising atau goyang-goyang saya tidak tahu, yang jelas saya sendiri belum pernah merasakan sensasi menumpanginya. lah?
+Kelebihan kedaraan roda tiga ini disamping bisa muat sekitar 2 sampai 3 penumpang, juga bisa menyelip ke gang sempit, menerobos kemacetan, masuk jalur Busway, dan berjalan mundur, eh..
 
 Bajay online rasanya sudah ada, namun jika dilihat di Google Play Store, User Interface dari aplikasinya sangat tidak niat, okelah mungkin mungkin cuma di Screenshot. Namun semakin miris setelah saya melihat feedbacknya. lupakan itu..
 
