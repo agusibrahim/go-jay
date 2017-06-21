@@ -1,5 +1,9 @@
 package ai.agusibrahim.brojekdemo.Helper;
+/*
+ Agus Ibrahim
+ http://fb.me/mynameisagoes
 
+ */
 import com.google.android.gms.maps.model.*;
 import java.io.BufferedReader;
 import java.io.IOException;
