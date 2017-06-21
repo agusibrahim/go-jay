@@ -1,3 +1,6 @@
+<img src="https://github.com/agusibrahim/go-jay/blob/master/img/GOJAY_Banner.jpg">
+
+
 Berdasarkan beberapa survey, Transportasi berbasis aplikasi menjadi angkutan yang paling digemari masyarakat. Kehadirannya menjadi alternatif bagi warga di kota-kota besar untuk menghindari kemacetan. Terlepas banyak pihak yang menentang  keberadaannya, transportasi online ini makin digemari dan semakin menjamur di beberapa kota.
 
 Di antara kita pasti tidak asing lagi dengan "Go-Jeg", yap! pasukan ijo yang banyak lalu lalang di jalanan ibukota, menyelip di gang-gang sempit dan bahkan mengantarkan makanan, lho?  Ya! bukan hanya mengantarkan penumpang, mereka juga bisa mengantarkan makanan dan masih banyak lagi.
@@ -54,6 +57,9 @@ GO-JAY Mendukung Runtime Permission di Android 23 (Mashmallow) keatas, juga adan
 Tentu masih banyak lagi yang harus ditambah dan bahkan dibenahi dari GO-JAY. Yang paling penting adalah membuat Aplikasi untuk driver, semacam pelacak lokasi (GPS Tracker) yang akan mengirim lokasi secara realtime ke server. Backend bisa menggunakan serverless macam [Firebase](https://firebase.google.com/)
  atau layanan dari [AWS](https://aws.amazon.com/)
 . Lokasi setiap driver di query berdasarkan jarak terdekat dari lokasi pengguna, mungkin bisa menggunakan [GeoFire](https://github.com/firebase/geofire-java) jika menggunakan Firebase
+
+## ATENTION for Android Studio Users
+Karena ini dibuat tanpa Android Studio, jadi perlu penyesuaian jika terjadi project error. GO-JAY dibuat menggunakan [AIDE](https://play.google.com/store/apps/details?id=com.aide.ui) di ponsel Android langsung, tanpa Laptop/PC.
 
 Punya ide hebat atau kerja sama? [Contact Me](http://telegram.me/agusibrahim)
 * [Agus Ibrahim](http://fb.me/mynameisagoes)
