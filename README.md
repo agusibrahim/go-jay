@@ -1,6 +1,6 @@
 Berdasarkan beberapa survey, Transportasi berbasis aplikasi menjadi angkutan yang paling digemari masyarakat. Kehadirannya menjadi alternatif bagi warga di kota-kota besar untuk menghindari kemacetan. Terlepas banyak pihak yang menentang  keberadaannya, transportasi online ini makin digemari dan semakin menjamur di beberapa kota.
 
-Di antara kita pasti tidak asing lagi dengan "Go-Jek", yap! pasukan ijo yang banyak lalu lalang di jalanan ibukota, menyelip di gang-gang sempit dan bahkan mengantarkan makanan, lho?  Ya! bukan hanya mengantarkan penumpang, mereka juga bisa mengantarkan makanan dan masih banyak lagi.
+Di antara kita pasti tidak asing lagi dengan "Go-Jeg", yap! pasukan ijo yang banyak lalu lalang di jalanan ibukota, menyelip di gang-gang sempit dan bahkan mengantarkan makanan, lho?  Ya! bukan hanya mengantarkan penumpang, mereka juga bisa mengantarkan makanan dan masih banyak lagi.
 
 Mengandalkan peta digital dari Google, membuat aplikasi mereka semakin interaktif, memilih tempat jemput dan lokasi tujuan hanya dengan klik.
 
@@ -25,12 +25,12 @@ GO-JAY mudah digunakan, tinggal pilih lokasi jemput dan lokasi tujuan, bisa pili
 ------------ | -------------
 Searchbar | Tariff View
 
-Tampil profesional dengan koordinasi animasi yang keren. 
+Tampil profesional dengan koordinasi animasi yang keren. Diharapkan pengguna bisa menggunakan aplikasi dengan nyaman. 
 
 ### Driver Terdekat
 <img src="https://github.com/agusibrahim/go-jay/blob/master/img/driverterdekat.gif" width="300">
 
-Menampilkan driver terdekat dari lokasi jemput.
+> Menampilkan driver terdekat dari lokasi jemput. 
 
 ### Edit Lokasi
 <img src="https://github.com/agusibrahim/go-jay/blob/master/img/editlokasi.gif" width="300">
@@ -42,11 +42,27 @@ Edit Lokasi jemput maupun lokasi tujuan
 
 Bukan hanya animasi kamera yang keren, kamera disini juga pintar. Akan di zoom out otomatis jika point A ataupun point B tertutup widget atau hilang dari pandangan, sehingga tampilan rute tampil jelas.
 
-## What Next?
-Selanjutnya adalah membuat Aplikasi driver, semacam pelacak lokasi (GPS Tracker) yang akan mengirim lokasi secara realtime ke server. Backend bisa menggunakan serverless macam Firebase atau layanan dari AWS.
+### Runtime Permission Support
+<img src="https://github.com/agusibrahim/go-jay/blob/master/img/Screenshot_20170621-203820.png" width="300"> | <img src="https://github.com/agusibrahim/go-jay/blob/master/img/Screenshot_20170621-203837.png" width="300">
+------------ | -------------
+Location Perms | Google Location Switch
 
-Punya ide atau kerja sama? [Contact Me](http://telegram.me/agusibrahim)
+GO-JAY Mendukung Runtime Permission di Android 23 (Mashmallow) keatas, juga adanya GPS switch instan, sehingga tidak perlu ke Pengaturan lokasi untuk mengaktifkan GPS.
+
+## What Next?
+Tentu masih banyak lagi yang harus ditambah dan bahkan dibenahi dari GO-JAY. Yang paling penting adalah membuat Aplikasi untuk driver, semacam pelacak lokasi (GPS Tracker) yang akan mengirim lokasi secara realtime ke server. Backend bisa menggunakan serverless macam [Firebase](https://firebase.google.com/)
+ atau layanan dari [AWS](https://aws.amazon.com/)
+. Lokasi setiap driver di query berdasarkan jarak terdekat dari lokasi pengguna, mungkin bisa menggunakan [GeoFire](https://github.com/firebase/geofire-java) jika menggunakan Firebase
+
+Punya ide hebat atau kerja sama? [Contact Me](http://telegram.me/agusibrahim)
 * [Agus Ibrahim](http://fb.me/mynameisagoes)
+
+## Credits
+* https://github.com/Ereza/CustomActivityOnCrash
+* https://github.com/yshrsmz/KeyboardVisibilityEvent
+* https://developers.google.com/maps/documentation/android-api/?hl=id
+* http://wptrafficanalyzer.in/blog/drawing-driving-route-directions-between-two-locations-using-google-directions-in-google-map-android-api-v2/
+* https://github.com/googlesamples/android-play-places
 
 ## License
 GO-JAY prototype makes use of the [GNU GPL v3.0](http://choosealicense.com/licenses/gpl-3.0/) license. Remember to make public your project source code when reusing GO-JAY code.

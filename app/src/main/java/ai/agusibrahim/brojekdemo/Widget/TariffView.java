@@ -1,4 +1,9 @@
 package ai.agusibrahim.brojekdemo.Widget;
+/*
+ Agus Ibrahim
+ http://fb.me/mynameisagoes
+
+ */
 import android.widget.FrameLayout;
 import android.util.AttributeSet;
 import android.content.Context;

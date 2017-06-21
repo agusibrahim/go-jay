@@ -1,5 +1,9 @@
 package ai.agusibrahim.brojekdemo;
+/*
+Agus Ibrahim
+http://fb.me/mynameisagoes
 
+*/
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
@@ -27,7 +31,6 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil;
 import android.animation.*;
-import com.jakewharton.scalpel.*;
 import android.widget.EditText;
 import java.util.*;
 import android.location.Location;
@@ -62,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 	ViewPropertyAnimator searchareaAnimate;
 	private boolean mMapIsTouched;
 	boolean sbOnceMove=true;
-	ScalpelFrameLayout scapel;
 	EditText fok;
 	boolean haszoom=false;
 	boolean movetomylocation=false;
@@ -83,7 +85,6 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 		centerMarker=(MyMarker) findViewById(R.id.mainactivity_makercenter);
 		addr_from=(AutoCompleteTextView) findViewById(R.id.booking2_from);
 		addr_to=(AutoCompleteTextView) findViewById(R.id.booking2_dest);
-		scapel=(ScalpelFrameLayout) findViewById(R.id.scapel);
 		fok=(EditText) findViewById(R.id.fok);
 		findViewById(R.id.clearfrom).setOnClickListener(this);
 		findViewById(R.id.clearto).setOnClickListener(this);
@@ -130,13 +131,19 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 			gmaps.getMyLocation();
 		}
 	}
+	
+	// runtime permission on result
 	@Override
-	public void onRequestPermissionsResult(int requestCode,
-										   String[] permissions,
-										   int[] grantResults) {
+	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		if (requestCode == REQUEST_LOCATION) {
 			if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				GPSrequest();
+				final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+				if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+					GPSrequest();
+				} else {
+					gmaps.setMyLocationEnabled(true);
+					gmaps.getMyLocation();
+				}
 			} else {
 				Toast.makeText(this, "Akses lokasi tidak di izinkan", 6000).show();
 				finish();
@@ -154,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 		}
 	}
 	
+	// clear pencarian
 	@Override
 	public void onClick(View p1) {
 		if(p1.getId()==R.id.clearfrom){
@@ -165,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 		}
 	}
 	
+	// di trigger saat pencarian dipilih
 	@Override
 	public void onSuggestResult(Place place, AutoCompleteTextView act) {
 		if(!isNavigationReady()&&(addr_from.getText().length()<1||addr_to.getText().length()<1))
@@ -172,6 +181,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 		setAddrValue(act==addr_from?addr_from:addr_to, place.getLatLng());
 	}
 	
+	// saat pencarian fokus
 	@Override
 	public void onFocus(final AutoCompleteTextView act) {
 		LatLng actpos=(LatLng)act.getTag();
@@ -201,10 +211,10 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 		}
 		// atur label pada centerMarker
 		if (act == addr_from) {
-			centerMarker.setText("Lokasi Jemput");
+			centerMarker.setText("LOKASI JEMPUT");
 			centerMarker.setColorRes(R.color.colorAddrStart, R.color.colorAddrStartPressed, 0);
 		} else if (act == addr_to) {
-			centerMarker.setText("Lokasi Tujuan");
+			centerMarker.setText("LOKASI TUJUAN");
 			centerMarker.setColorRes(R.color.colorAddrEnd, R.color.colorAddrEndPressed, 0);
 		}
 	}
@@ -220,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 		tariff.show();
 		// dapatkan jarak dari titik A ke B dari google maps
 		// ini akurat karena menghitung berdasarkan rute jalan yang ditempuh
-		double jarak=j.distanceInKm;//Utils.distance(na[0], na[1], 'K');
+		double jarak=j.distanceInKm;
 		DecimalFormat df = new DecimalFormat("#.#");
 		//df.setRoundingMode(RoundingMode.CEILING);
 		haszoom=false;
@@ -312,17 +322,21 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 				public boolean onMyLocationButtonClick() {
 					// cek apakah GPS aktif
 					// jika tidak maka jalankan GPSrequest()
+					method();
+					return false;
+				}
+
+				private void method() {
 					final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-					if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+					if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 						GPSrequest();
-					}else{
+					} else {
 						// jika GPS aktif, tampikan waiting indikator dan cari lokasi pengguna
-						movetomylocation=true;
+						movetomylocation = true;
 						waitIndicator.setVisibility(View.VISIBLE);
 						gmaps.getMyLocation();
-						handler.postDelayed(runnableOnTimedOut, (3 * 60)*1000);
+						handler.postDelayed(runnableOnTimedOut, (3 * 60) * 1000);
 					}
-					return false;
 				}
 			});
 		// di trigger saat lokasi pengguna terdeteksi atau terjadi perubahan lokasi
@@ -563,7 +577,6 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
-// Check for the integer request code originally supplied to startResolutionForResult().
             case REQUEST_CHECK_SETTINGS:
                 switch (resultCode) {
                     case RESULT_OK:
@@ -571,7 +584,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 						gmaps.getMyLocation();
                         break;
                     case RESULT_CANCELED:
-                        GPSrequest();//keep asking if imp or do whatever
+                        GPSrequest();
                         break;
                 }
                 break;
@@ -581,12 +594,6 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main_menu, menu);
 		return super.onCreateOptionsMenu(menu);
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		scapel.setLayerInteractionEnabled(!scapel.isLayerInteractionEnabled());
-		return super.onOptionsItemSelected(item);
 	}
 	
 }

@@ -1,5 +1,9 @@
 package ai.agusibrahim.brojekdemo.Helper;
+/*
+ Agus Ibrahim
+ http://fb.me/mynameisagoes
 
+ */
 import com.google.android.gms.maps.model.LatLng;
 import android.location.Location;
 import java.util.List;
