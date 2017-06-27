@@ -66,6 +66,8 @@ Punya ide gila atau ingin menjalin kerja sama? [Contact Me](http://telegram.me/a
 
 <img src="https://i1.sndcdn.com/artworks-000220944135-hb3nko-t500x500.jpg" width="300">
 
+### [Download GO-JAY APK](https://www.dropbox.com/s/s81dzgu86nk1u0d/Gojay_demo.apk?dl=0)
+
 ## Changelog (27/6/17)
 * Fix crash on kitkat and below
 * Fix animate camera problem
