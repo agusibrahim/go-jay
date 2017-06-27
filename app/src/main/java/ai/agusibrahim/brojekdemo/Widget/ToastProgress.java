@@ -37,7 +37,7 @@ public class ToastProgress extends Toast{
 		prog.setLayoutParams(new LinearLayout.LayoutParams((int)dp2px(ctx, 20), (int)dp2px(ctx, 20)));
 		root.addView(prog);
 		clt=new TextView(ctx);
-		clt.setTextAppearance(android.R.attr.textAppearanceSmall);
+		clt.setTextSize(14);
 		clt.setTextColor(Color.WHITE);
 		LinearLayout.LayoutParams tlp=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		tlp.gravity=Gravity.CENTER_VERTICAL;
