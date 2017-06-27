@@ -54,6 +54,7 @@ import android.graphics.drawable.Drawable;
 import android.app.Application;
 import android.widget.ImageView;
 import com.google.android.gms.location.LocationServices;
+import android.support.v7.app.AppCompatActivity;
 
 public class PlaceAutoCompleteHelper implements GoogleApiClient.OnConnectionFailedListener, Application.ActivityLifecycleCallbacks, View.OnFocusChangeListener {
 	public GoogleApiClient mGoogleApiClient;
@@ -75,9 +76,8 @@ public class PlaceAutoCompleteHelper implements GoogleApiClient.OnConnectionFail
 	public interface onTextFocusListener {
 		void onFocus(AutoCompleteTextView act);
 	}
-	Context ctx;
 	public PlaceAutoCompleteHelper(AutoCompleteTextView ... act, FragmentActivity fa) {
-		this.ctx = act[0].getContext();
+		Context ctx = act[0].getContext();
 		mGoogleApiClient = new GoogleApiClient.Builder(ctx)
 			.enableAutoManage(fa, 0, this)
 			.addApi(Places.GEO_DATA_API)
@@ -90,14 +90,16 @@ public class PlaceAutoCompleteHelper implements GoogleApiClient.OnConnectionFail
 			ac.setAdapter(mAdapter);
 			ac.setOnFocusChangeListener(this);
 		}
-		placeIcon = ctx.getResources().getDrawable(R.drawable.ic_map_marker);
+		placeIcon = act[0].getContext().getResources().getDrawable(R.drawable.ic_map_marker);
+	}
+	public void install(Context ctx){
 		((Activity)ctx).getApplication().registerActivityLifecycleCallbacks(this);
 	}
 	public void setBound(LatLngBounds b) {
 		mBounds = b;
 	}
 	public PlaceAutoCompleteHelper(AutoCompleteTextView... act) {
-		this.ctx = act[0].getContext();
+		Context ctx = act[0].getContext();
 		mGoogleApiClient = new GoogleApiClient.Builder(ctx)
 			.addApi(Places.GEO_DATA_API)
 			.addApi(LocationServices.API)
@@ -109,7 +111,8 @@ public class PlaceAutoCompleteHelper implements GoogleApiClient.OnConnectionFail
 			ac.setAdapter(mAdapter);
 			ac.setOnFocusChangeListener(this);
 		}
-		((Activity)ctx).getApplication().registerActivityLifecycleCallbacks(this);
+		
+		//((Activity)ctx).getApplication().registerActivityLifecycleCallbacks(this);
 	}
 	public void setOnSuggestResultListener(onSuggestResultListener x) {
 		callback = x;

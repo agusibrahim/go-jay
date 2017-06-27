@@ -4,21 +4,13 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/coordinatorLayout"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:fitsSystemWindows="true"
-	android:background="@color/windowBackground">
+	android:layout_height="match_parent">
 
-	<android.support.design.widget.AppBarLayout
+	<View
 		android:id="@+id/appBarLayout"
 		android:elevation="0dp"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
-
-		<include
-			android:id="@+id/toolbar"
-			layout="@layout/toolbar"/>
-
-	</android.support.design.widget.AppBarLayout>
+		android:layout_width="0dp"
+		android:layout_height="0dp"/>
 
 	<RelativeLayout
 		android:layout_below="@id/appBarLayout"
@@ -167,24 +159,15 @@
 		android:layout_width="match_parent"
 		android:orientation="vertical"
 		android:layout_alignParentBottom="true"
-		android:layout_centerHorizontal="true">
+		android:layout_centerHorizontal="true"
+		android:id="@+id/mainactivityLinearLayout1">
 
 		<ai.agusibrahim.brojekdemo.Widget.TariffView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/tariff"
-			android:layout_marginLeft="5dp"
-			android:layout_marginRight="5dp"
-			android:layout_marginBottom="5dp"/>
-
-		<Button
-			android:layout_height="wrap_content"
-			android:layout_width="match_parent"
-			android:text="Pesan Bajaj"
-			android:padding="10dp"
-			android:background="@drawable/btn_order"
-			android:textColor="#FFFFFF"/>
-
+			android:layout_marginBottom="0dp"/>
 	</LinearLayout>
 
 </RelativeLayout>
+

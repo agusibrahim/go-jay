@@ -49,6 +49,8 @@ import android.location.LocationManager;
 import com.google.android.gms.location.*;
 import android.support.v4.app.ActivityCompat;
 import android.content.pm.PackageManager;
+import android.widget.RelativeLayout;
+import ai.agusibrahim.brojekdemo.Widget.ToastProgress;
 
 public class MainActivity extends AppCompatActivity implements DirectionDrawHelper.OnNavigateReadyListener, View.OnClickListener, OnMapReadyCallback,PlaceAutoCompleteHelper.onSuggestResultListener,PlaceAutoCompleteHelper.onTextFocusListener {
 	Toolbar toolbar;
@@ -59,29 +61,31 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 	private PlaceAutoCompleteHelper pickerHelper;
 	LatLng home=new LatLng(-6.169994, 106.830928);
 	private Geocoder geoCoder;
-	private View searcharea,mapframe;
+	private View searcharea,mapframe,TariffVroot;
 	TariffView tariff;
-	private int mapsPadding;
 	ViewPropertyAnimator searchareaAnimate;
 	private boolean mMapIsTouched;
 	boolean sbOnceMove=true;
 	EditText fok;
+	VMargin vmargin;
 	boolean haszoom=false;
 	boolean movetomylocation=false;
 	List<Marker> drivers=new ArrayList<Marker>();
 	private Marker firstMarker;
 	final int REQUEST_CHECK_SETTINGS=122;
 	final int REQUEST_LOCATION=125;
-	private ProgressBar waitIndicator;
 	private android.os.Handler handler=new android.os.Handler();
+
+	private ToastProgress tprog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_activity);
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
-		waitIndicator = (ProgressBar) toolbar.findViewById(R.id.toolbarProgressBar1);
+		//waitIndicator = (ProgressBar) toolbar.findViewById(R.id.toolbarProgressBar1);
 		mapframe = findViewById(R.id.map_frame);
 		tariff = (TariffView) findViewById(R.id.tariff);
+		TariffVroot=findViewById(R.id.tariffviewLinearLayout2);
 		centerMarker = (MyMarker) findViewById(R.id.mainactivity_makercenter);
 		addr_from = (AutoCompleteTextView) findViewById(R.id.booking2_from);
 		addr_to = (AutoCompleteTextView) findViewById(R.id.booking2_dest);
@@ -92,10 +96,11 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 		addr_from.setTag(new LatLng(0, 0));
 		addr_to.setTag(new LatLng(0, 0));
 		searchareaAnimate = searcharea.animate();
-		setSupportActionBar(toolbar);
+		//setSupportActionBar(toolbar);
 		initilizeMap();
 		geoCoder = new Geocoder(getBaseContext(), Locale.getDefault());
 		pickerHelper = new PlaceAutoCompleteHelper(addr_from, addr_to);
+		pickerHelper.install(this);
 		pickerHelper.setOnSuggestResultListener(this);
 		pickerHelper.setOnFocusListener(this);
 		centerMarker.setOnClickListener(new View.OnClickListener(){
@@ -114,9 +119,35 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 					}
 				}
 			});
-		waitIndicator.getIndeterminateDrawable().setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.MULTIPLY);
+		setSearchbarMargin();
+		tprog=new ToastProgress(MainActivity.this);
+		//waitIndicator.getIndeterminateDrawable().setColorFilter(Color.WHITE, android.graphics.PorterDuff.Mode.MULTIPLY);
 	}
 
+	private void setSearchbarMargin() {
+		int sbheight = 0;
+		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			sbheight = getResources().getDimensionPixelSize(resourceId);
+		} 
+		int dp10=(int)Utils.dp2px(this, 10);
+		final int mtop=sbheight+(int)Utils.dp2px(this, 10);
+		RelativeLayout.LayoutParams salp=(RelativeLayout.LayoutParams) searcharea.getLayoutParams();
+		salp.setMargins(dp10, mtop, dp10, dp10);
+		searcharea.setLayoutParams(salp);
+		searcharea.post(new Runnable(){
+				@Override
+				public void run() {
+					TariffVroot.post(new Runnable(){
+							@Override
+							public void run() {
+								vmargin=new VMargin(mtop+searcharea.getHeight(), TariffVroot.getHeight());
+							}
+						});
+				}
+			});
+	}
+	
 	private void initilizeMap() {
         MapFragment mapf=(MapFragment) getFragmentManager().findFragmentById(R.id.map);
 		mapf.getMapAsync(this);
@@ -175,10 +206,21 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 
 	// di trigger saat pencarian dipilih
 	@Override
-	public void onSuggestResult(Place place, AutoCompleteTextView act) {
+	public void onSuggestResult(final Place place, final AutoCompleteTextView act) {
+		final LatLng placelatlng=place.getLatLng();
 		if (!isNavigationReady() && (addr_from.getText().length() < 1 || addr_to.getText().length() < 1))
-			gmaps.animateCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
-		setAddrValue(act == addr_from ?addr_from: addr_to, place.getLatLng());
+			gmaps.animateCamera(CameraUpdateFactory.newLatLng(place.getLatLng()), 1000, new GoogleMap.CancelableCallback(){
+					@Override
+					public void onFinish() {
+						setAddrValue(act == addr_from ?addr_from: addr_to, placelatlng);
+					}
+
+					@Override
+					public void onCancel() {
+						setAddrValue(act == addr_from ?addr_from: addr_to, placelatlng);
+					}
+				});
+		else setAddrValue(act == addr_from ?addr_from: addr_to, placelatlng);
 	}
 
 	// saat pencarian fokus
@@ -266,13 +308,6 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 		gmaps = map;
 		checkPerms();
 		map.getUiSettings(). setMyLocationButtonEnabled(false);
-		// saat searcharea siap, cari tahu tingginya berapa, dan jadikan tinggi searcharea sebagai variabel maps padding
-		searcharea.post(new Runnable(){
-				@Override
-				public void run() {
-					mapsPadding = searcharea.getHeight();
-				}
-			});
 		map.setPadding(20, 0, 20, 10);
 		map.moveCamera(CameraUpdateFactory.newLatLngZoom(home, 16f));
 		// camera move listener
@@ -284,26 +319,18 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 					// hanya saat maps digerakan menggunakan tangan (buka programatically)
 					if (mMapIsTouched) {
 						// one shot action
-						if (sbOnceMove) {
+						/*if (sbOnceMove) { // remove hideable searchBar
 							// animasi sembunyi pada searchbar
 							searchareaAnimate.setStartDelay(0);
 							searchareaAnimate.setDuration(500);
-							searchareaAnimate.translationY(-mapsPadding + (-toolbar.getMeasuredHeight()));
+							searchareaAnimate.translationY(-searchbarHeight);
 							searchareaAnimate.start();
 							UIUtil.hideKeyboard(MainActivity.this);
-						}
+						}*/
 						sbOnceMove = false;
 					}
 				}
 			});
-		final Runnable runnableOnTimedOut=new Runnable(){
-			@Override
-			public void run() {
-				if (waitIndicator.getVisibility() == View.VISIBLE) {
-					Toast.makeText(MainActivity.this, "GPS Waiting Timed out", 1).show();
-				}
-			}
-		};
 		// camera idle (diam) listener
 		// di trigger saat pertama maps dijalankan dan saat selesai dari move (menggeser maps)
 		map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener(){
@@ -312,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 					// atur centerMarker ke solid (bukan samar lagi)
 					centerMarker.setAlpha(1.0f);
 					// animasi tampil pada searchbar
-					searchareaAnimate.setStartDelay(1500).setDuration(800).translationY(0).start();
+					//searchareaAnimate.setStartDelay(1500).setDuration(800).translationY(0).start();
 					sbOnceMove = true;
 				}
 			});
@@ -327,10 +354,20 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 						GPSrequest();
 					} else {
 						// jika GPS aktif, tampikan waiting indikator dan cari lokasi pengguna
+						if(tprog.isShowing()){
+							tprog.cancel();
+							setTitle(""+System.currentTimeMillis());
+							return false;
+						}
 						movetomylocation = true;
-						waitIndicator.setVisibility(View.VISIBLE);
 						gmaps.getMyLocation();
-						handler.postDelayed(runnableOnTimedOut, (3 * 60) * 1000);
+						tprog.show("Waiting for location...", Gravity.CENTER, (1000*60)*2);
+						tprog.setOnTimedOutListener(new ToastProgress.onTimedOutListener(){
+								@Override
+								public void onTimedOut() {
+									Toast.makeText(MainActivity.this, "Timed Out",0).show();
+								}
+							});
 					}
 					return false;
 				}
@@ -340,8 +377,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 				@Override
 				public void onMyLocationChange(Location loc) {
 					if (movetomylocation) {
-						handler.removeCallbacks(runnableOnTimedOut);
-						waitIndicator.setVisibility(View.INVISIBLE);
+						tprog.cancel();
 						gmaps.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(loc.getLatitude(), loc.getLongitude()), 15f), 1500, null);
 					}
 					movetomylocation = false;
@@ -354,7 +390,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 	private void setNavigationFocus() {
 		centerMarker.setVisibility(View.GONE);
 		LatLng[] na=getNaviagatePoint();
-		Utils.requestCenterCamera(this, gmaps, na[0], na[1], mapsPadding);
+		Utils.requestCenterCamera(this, gmaps, na[0], na[1], vmargin, null);
 		fok.setFocusable(true);
 		fok.requestFocus();
 		haszoom = false;
@@ -409,15 +445,15 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 				return;
 			}
 			// jika path (jalur navigasi) sudah dibuat
-			if (DirectionDrawHelper.pathline != null) {
+			if (DirectionDrawHelper.anim != null) {
 				// hapus path serta marker A B
-				DirectionDrawHelper.pathline.remove();
+				DirectionDrawHelper.anim.clearPolyline();
 				DirectionDrawHelper.add_startMarker.remove();
 				DirectionDrawHelper.add_endMarker.remove();
 			}
 			UIUtil.hideKeyboard(this);
 			// cari arah navigasi menggunakan DirectionDrawHelper dan membuat path (jalur navigasi) nya
-			DirectionDrawHelper pos=new DirectionDrawHelper(this, gmaps, na[0], na[1], mapsPadding);
+			DirectionDrawHelper pos=new DirectionDrawHelper(this, gmaps, na[0], na[1], vmargin);
 			pos.setOnNavigateReadyListener(this);
 			pos.start();
 
@@ -436,9 +472,9 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 							// TODO: Implement this method
 						}
 					});
+			if(firstMarker!=null){ firstMarker.remove();firstMarker=null;}
 			// buat marker di point pertama
-			firstMarker = gmaps.addMarker(new MarkerOptions().position(loc).icon(BitmapDescriptorFactory.fromResource(acc == addr_from ?R.drawable.ic_start_marker: R.drawable.ic_end_marker)));
-
+			if(firstMarker==null) firstMarker = gmaps.addMarker(new MarkerOptions().position(loc).icon(BitmapDescriptorFactory.fromResource(acc == addr_from ?R.drawable.ic_start_marker: R.drawable.ic_end_marker)));
 			haszoom = true;
 		}
 		// jika data dari addr_from
@@ -500,7 +536,7 @@ public class MainActivity extends AppCompatActivity implements DirectionDrawHelp
 						centerMarker.setVisibility(View.VISIBLE);
 						addr_from.requestFocus();
 						haszoom = false;
-						waitIndicator.setVisibility(View.INVISIBLE);
+						//waitIndicator.setVisibility(View.INVISIBLE);
 						Toast.makeText(MainActivity.this, "Booking Dibatalkan", 0).show();
 					}
 				});

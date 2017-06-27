@@ -20,7 +20,7 @@ import android.animation.*;
 public class TariffView extends FrameLayout
 {
 	TextView jarak, oldprice,lowprice,normprice,reload;
-	private View v, myLoc, jarakBar, root;
+	private View v, myLoc, jarakBar, rootv;
 	public static int myHeight=0;
 	public static int[] jarakBarHeight=new int[2];
 	private GoogleMap.OnMyLocationButtonClickListener callmyloc;
@@ -46,6 +46,7 @@ public class TariffView extends FrameLayout
 		reload=(TextView) v.findViewById(R.id.tariffviewReload);
 		jarakBar=v.findViewById(R.id.tariffviewLinearLayout1);
 		myLoc=v.findViewById(R.id.tariffviewMyLoc);
+		rootv=v.findViewById(R.id.tariffviewLinearLayout2);
 		oldprice.setPaintFlags(oldprice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 		myLoc.setOnClickListener(new View.OnClickListener(){
 				@Override
@@ -68,23 +69,21 @@ public class TariffView extends FrameLayout
 		callmyloc=x;
 	}
 	public void hide(final boolean animate){
-		root=(View)getParent();
-		post(new Runnable(){
+		rootv.post(new Runnable(){
 				@Override
 				public void run() {
-					root.animate().setStartDelay(0);
-					root.animate().setDuration(animate?500:0);
-					root.animate().translationY(getHeight()-Utils.dp2px(getContext(), 10));
-					root.animate().start();
+					animate().setStartDelay(0);
+					animate().setDuration(animate?500:0);
+					animate().translationY(rootv.getHeight());
+					animate().start();
 				}
 			});
 	}
 	public void show(){
-		root=(View)getParent();
-		root.animate().setStartDelay(1000);
-		root.animate().setDuration(1500);
-		root.animate().translationY(0);
-		root.animate().start();
+		animate().setStartDelay(1000);
+		animate().setDuration(1500);
+		animate().translationY(0);
+		animate().start();
 	}
 	public void setTarifByJarak(double d){
 		long tarif=0;

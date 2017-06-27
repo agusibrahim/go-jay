@@ -45,20 +45,21 @@ public class DirectionDrawHelper {
 	private LatLng addr_start, addr_end;
 	public static Marker add_startMarker,add_endMarker;
 	Context ctx;
+	public static MapAnimator anim;
 	public static Polyline pathline;
 	Point addr_startPoint, addr_endPoint;
-	private int mapsPadding;
+	private VMargin vmargin;
 	private DirectionDrawHelper.OnNavigateReadyListener callback;
 	public interface OnNavigateReadyListener {
 		void onNavigationReady(Polyline path, Jarak jarak);
 		void onNavigationFailed();
 	}
-	public DirectionDrawHelper(Context ctx, GoogleMap map, LatLng start, LatLng end, int padding) {
+	public DirectionDrawHelper(Context ctx, GoogleMap map, LatLng start, LatLng end, VMargin v) {
 		this.map = map;
 		addr_start = start;
 		addr_end = end;
 		this.ctx = ctx;
-		mapsPadding = padding;
+		vmargin=v;
 		url = getDirectionsUrl(start, end);
 		android.util.Log.d("lok", "dest:" + end + "---start:" + start);
  	}
@@ -69,7 +70,8 @@ public class DirectionDrawHelper {
 	public static void clearNavigate() {
 		add_endMarker.remove();
 		add_startMarker.remove();
-		pathline.remove();
+		if(anim!=null) anim.clearPolyline();
+		anim=null;
 	}
 	public void setOnNavigateReadyListener(OnNavigateReadyListener x) {
 		callback = x;
@@ -135,6 +137,7 @@ public class DirectionDrawHelper {
     }
 	private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> > {
  		public Jarak jarak;
+		ArrayList<LatLng> points = null;
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
             JSONObject jObject;
@@ -151,7 +154,7 @@ public class DirectionDrawHelper {
         }
 		@Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
-            ArrayList<LatLng> points = null;
+            
             PolylineOptions lineOptions = null;
   			android.util.Log.d("lok", "res2:" + result);
             for (int i=0;i < result.size();i++) {
@@ -168,7 +171,13 @@ public class DirectionDrawHelper {
 				lineOptions.addAll(points);
                 lineOptions.width(7);
                 lineOptions.color(Color.RED);
- 				Utils.requestCenterCamera(ctx, map, addr_start, addr_end, mapsPadding);
+				anim=MapAnimator.getInstance();
+ 				Utils.requestCenterCamera(ctx, map, addr_start, addr_end, vmargin, new Utils.OnCameraComplete(){
+						@Override
+						public void onComplete() {
+							anim.animateRoute(map, points);
+						}
+					});
             }
  			add_startMarker = map.addMarker(new MarkerOptions()
 											.position(addr_start)
@@ -176,10 +185,15 @@ public class DirectionDrawHelper {
 			add_endMarker = map.addMarker(new MarkerOptions()
 										  .position(addr_end)
 										  .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_end_marker)));
-			pathline = map.addPolyline(lineOptions);
+			//pathline = map.addPolyline(lineOptions);
+			//pathline.setVisible(false);
+			
+			
 			if (callback != null)callback.onNavigationReady(pathline, jarak);
         }
     }
+	
+	
  	public class DirectionsJSONParser {
 		public Jarak jarak=null;
  		public List<List<HashMap<String,String>>> parse(JSONObject jObject) {

@@ -20,137 +20,156 @@
 	<LinearLayout
 		android:layout_height="wrap_content"
 		android:layout_width="match_parent"
-		android:orientation="horizontal"
-		android:padding="10dp"
-		android:clickable="true"
-		android:background="#EEEEEE"
 		android:layout_below="@id/tariffviewMyLoc"
-		android:id="@+id/tariffviewLinearLayout1">
+		android:orientation="vertical"
+		android:id="@+id/tariffviewLinearLayout2">
 
-		<TextView
-			android:layout_width="wrap_content"
+		<LinearLayout
 			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:text="Jarak (25,6 km)"
-			android:id="@+id/tariffviewJarak"/>
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:padding="10dp"
+			android:clickable="true"
+			android:background="#EEEEEE"
+			android:layout_marginLeft="5dp"
+			android:layout_marginRight="5dp"
+			android:id="@+id/tariffviewLinearLayout1">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="Jarak (25,6 km)"
+				android:id="@+id/tariffviewJarak"/>
+
+		</LinearLayout>
+
+		<RelativeLayout
+			android:orientation="horizontal"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="5dp"
+			android:layout_marginRight="5dp"
+			android:padding="10dp"
+			android:clickable="true"
+			android:layout_below="@id/tariffviewLinearLayout1"
+			android:background="@drawable/bg_rounded_corners_white">
+
+			<RadioButton
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/sbRadioButton1"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="ANJAY-PAY"
+				android:layout_toRightOf="@id/sbRadioButton1"
+				android:layout_alignBottom="@id/sbRadioButton1"
+				android:layout_alignTop="@id/sbRadioButton1"
+				android:gravity="center_vertical"
+				android:layout_marginLeft="10dp"
+				android:textStyle="bold"
+				android:id="@+id/sbTextView1"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="SALDO Rp 57.000"
+				android:layout_below="@id/sbTextView1"
+				android:layout_alignStart="@id/sbTextView1"
+				android:textColor="#EB433B"
+				android:id="@+id/sbTextView2"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="ISI SALDO"
+				android:layout_toRightOf="@id/sbTextView2"
+				android:layout_below="@id/sbTextView1"
+				android:layout_marginLeft="10dp"
+				android:textColor="#38AD54"
+				android:id="@+id/tariffviewReload"
+				android:textStyle="bold"
+				android:visibility="gone"/>
+
+			<RadioButton
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_below="@id/sbTextView2"
+				android:layout_marginTop="10dp"
+				android:id="@+id/sbRadioButton2"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="TUNAI"
+				android:layout_toRightOf="@id/sbRadioButton2"
+				android:layout_alignTop="@id/sbRadioButton2"
+				android:layout_marginLeft="10dp"
+				android:layout_alignBottom="@id/sbRadioButton2"
+				android:gravity="center_vertical"
+				android:textStyle="bold"
+				android:id="@+id/sbTextView5"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="Rp 46.000"
+				android:layout_alignParentRight="true"
+				android:layout_alignBottom="@id/sbRadioButton1"
+				android:textStyle="bold"
+				android:id="@+id/tariffviewOldPrice"
+				android:layout_alignStart="@id/sbTextView1"
+				android:gravity="center_vertical|end"
+				android:singleLine="true"
+				android:layout_alignTop="@id/sbRadioButton1"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="Rp 36.000"
+				android:layout_below="@id/tariffviewOldPrice"
+				android:layout_alignStart="@id/tariffviewOldPrice"
+				android:textStyle="bold"
+				android:textColor="#EB433B"
+				android:id="@+id/tariffviewLowPrice"
+				android:gravity="end"
+				android:layout_alignParentRight="true"
+				android:singleLine="true"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceSmall"
+				android:text="Rp 46.000"
+				android:layout_alignParentRight="true"
+				android:layout_alignStart="@id/tariffviewOldPrice"
+				android:layout_alignBottom="@id/sbTextView5"
+				android:textStyle="bold"
+				android:id="@+id/tariffviewNormalPrice"
+				android:gravity="center_vertical|end"
+				android:singleLine="true"
+				android:layout_alignTop="@id/sbRadioButton2"/>
+
+		</RelativeLayout>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="Pesan Bajaj"
+			android:padding="10dp"
+			android:background="@drawable/btn_order"
+			android:textColor="#FFFFFF"
+			android:layout_marginTop="5dp"/>
 
 	</LinearLayout>
-
-	<RelativeLayout
-		android:orientation="horizontal"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:padding="10dp"
-		android:clickable="true"
-		android:layout_below="@id/tariffviewLinearLayout1"
-		android:background="@drawable/bg_rounded_corners_white">
-
-		<RadioButton
-			android:layout_height="wrap_content"
-			android:layout_width="wrap_content"
-			android:id="@+id/sbRadioButton1"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:text="ANJAY-PAY"
-			android:layout_toRightOf="@id/sbRadioButton1"
-			android:layout_alignBottom="@id/sbRadioButton1"
-			android:layout_alignTop="@id/sbRadioButton1"
-			android:gravity="center_vertical"
-			android:layout_marginLeft="10dp"
-			android:textStyle="bold"
-			android:id="@+id/sbTextView1"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:text="SALDO Rp 57.000"
-			android:layout_below="@id/sbTextView1"
-			android:layout_alignStart="@id/sbTextView1"
-			android:textColor="#EB433B"
-			android:id="@+id/sbTextView2"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:text="ISI SALDO"
-			android:layout_toRightOf="@id/sbTextView2"
-			android:layout_below="@id/sbTextView1"
-			android:layout_marginLeft="10dp"
-			android:textColor="#38AD54"
-			android:id="@+id/tariffviewReload"
-			android:textStyle="bold"
-			android:visibility="gone"/>
-
-		<RadioButton
-			android:layout_height="wrap_content"
-			android:layout_width="wrap_content"
-			android:layout_below="@id/sbTextView2"
-			android:layout_marginTop="10dp"
-			android:id="@+id/sbRadioButton2"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:text="TUNAI"
-			android:layout_toRightOf="@id/sbRadioButton2"
-			android:layout_alignTop="@id/sbRadioButton2"
-			android:layout_marginLeft="10dp"
-			android:layout_alignBottom="@id/sbRadioButton2"
-			android:gravity="center_vertical"
-			android:textStyle="bold"
-			android:id="@+id/sbTextView5"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:text="Rp 46.000"
-			android:layout_alignParentRight="true"
-			android:layout_alignBottom="@id/sbRadioButton1"
-			android:textStyle="bold"
-			android:id="@+id/tariffviewOldPrice"
-			android:layout_alignStart="@id/sbTextView1"
-			android:gravity="center_vertical|end"
-			android:singleLine="true"
-			android:layout_alignTop="@id/sbRadioButton1"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:text="Rp 36.000"
-			android:layout_below="@id/tariffviewOldPrice"
-			android:layout_alignStart="@id/tariffviewOldPrice"
-			android:textStyle="bold"
-			android:textColor="#EB433B"
-			android:id="@+id/tariffviewLowPrice"
-			android:gravity="end"
-			android:layout_alignParentRight="true"
-			android:singleLine="true"/>
-
-		<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceSmall"
-			android:text="Rp 46.000"
-			android:layout_alignParentRight="true"
-			android:layout_alignStart="@id/tariffviewOldPrice"
-			android:layout_alignBottom="@id/sbTextView5"
-			android:textStyle="bold"
-			android:id="@+id/tariffviewNormalPrice"
-			android:gravity="center_vertical|end"
-			android:singleLine="true"
-			android:layout_alignTop="@id/sbRadioButton2"/>
-
-	</RelativeLayout>
-
-	
 
 </RelativeLayout>
 

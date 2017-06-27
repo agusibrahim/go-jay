@@ -18,8 +18,12 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import ai.agusibrahim.brojekdemo.Widget.*;
+import ai.agusibrahim.brojekdemo.Helper.Utils.*;
+import ai.agusibrahim.brojekdemo.Model.*;
 
 public class Utils {
+
+	private static Utils.OnCameraComplete camcallback;
 	// teken from https://stackoverflow.com/a/35843019
 	public static LatLng getRandLocation(LatLng point, int radius) {
 
@@ -102,8 +106,14 @@ public class Utils {
     private static double rad2deg(double rad) {
 		return (rad * 180.0 / Math.PI);
     }
+	public interface OnCameraComplete{
+		void onComplete();
+	}
+	public void setOnCameraCompleteListener(OnCameraComplete x){
+		camcallback=x;
+	}
 	// Camera correction by Agus Ibrahim
-	private static void cameraCorrection(final Context ctx, final GoogleMap gmap, final LatLng start, final LatLng end, final int padding) {
+	private static void cameraCorrection(final Context ctx, final GoogleMap gmap, final LatLng start, final LatLng end, final VMargin padding) {
 		GoogleMap.CancelableCallback cameraOnFinish=new GoogleMap.CancelableCallback(){
 			@Override
 			public void onFinish() {
@@ -119,21 +129,27 @@ public class Utils {
 		Point addr_endPoint = gmap.getProjection().toScreenLocation(end);
 		DisplayMetrics dm=ctx.getResources().getDisplayMetrics();
 		int maxX=dm.widthPixels;
-		if (addr_startPoint.y < padding || addr_endPoint.y < padding) {
+		if (addr_startPoint.y < padding.searchbar_margin || addr_endPoint.y < padding.searchbar_margin) {
 			gmap.animateCamera(CameraUpdateFactory.zoomBy(-1f), 1000, cameraOnFinish);
+			android.util.Log.d("jos", "Batas atas");
 		} else if (addr_startPoint.x < dp2px(ctx, 10) || addr_endPoint.x < dp2px(ctx, 10) || addr_startPoint.x > maxX - dp2px(ctx, 10) || addr_endPoint.x > maxX - dp2px(ctx, 10)) {
 			gmap.animateCamera(CameraUpdateFactory.zoomBy(-0.2f), 1000, cameraOnFinish);
-		} else if (addr_startPoint.y > (dm.heightPixels - (TariffView.myHeight + dp2px(ctx, 70))) || addr_endPoint.y > (dm.heightPixels - (TariffView.myHeight + dp2px(ctx, 70)))) {
-			gmap.animateCamera(CameraUpdateFactory.zoomBy(-0.3f), 1000, cameraOnFinish);
+			android.util.Log.d("jos", "Batas samping");
+		} else if (addr_startPoint.y > (dm.heightPixels - padding.tariffview_margin) || addr_endPoint.y > (dm.heightPixels - padding.tariffview_margin)) {
+			gmap.animateCamera(CameraUpdateFactory.zoomBy(-0.2f), 1000, cameraOnFinish);
+			android.util.Log.d("jos", "Batas bawah");
+		}else{
+			if(camcallback!=null) camcallback.onComplete();
 		}
-		android.util.Log.d("jos", "batas: " + (dm.heightPixels - (TariffView.myHeight + dp2px(ctx, 10))));
+		android.util.Log.d("jos", "batas: " + (dm.heightPixels - padding.tariffview_margin));
 		android.util.Log.d("jos", "marker: " + addr_endPoint.y);
 		android.util.Log.d("jos", "70dp: " + dp2px(ctx, 70));
 	}
 	
-	public static void requestCenterCamera(final Context ctx, final GoogleMap gmap, final LatLng start, final LatLng end, final int padding) {
+	public static void requestCenterCamera(final Context ctx, final GoogleMap gmap, final LatLng start, final LatLng end, final VMargin padding, OnCameraComplete x) {
 		final LatLngBounds.Builder builder = new LatLngBounds.Builder();
 		builder.include(start).include(end);
+		camcallback=x;
 		gmap.animateCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 0), 1000, new GoogleMap.CancelableCallback(){
 				@Override
 				public void onFinish() {

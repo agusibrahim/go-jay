@@ -66,12 +66,21 @@ Punya ide gila atau ingin menjalin kerja sama? [Contact Me](http://telegram.me/a
 
 <img src="https://i1.sndcdn.com/artworks-000220944135-hb3nko-t500x500.jpg" width="300">
 
+## Changelog (27/6/17)
+* Fix crash on kitkat and below
+* Fix animate camera problem
+* Add animate route (uber app like), credit https://github.com/amalChandran/google-maps-route-animation
+* Add loading indicator (my location finder) on center of screen
+* Full screen map mode on 21+ (transparent statusbar)
+* And more...
+
 ## Credits
 * https://github.com/Ereza/CustomActivityOnCrash
 * https://github.com/yshrsmz/KeyboardVisibilityEvent
 * https://developers.google.com/maps/documentation/android-api/?hl=id
 * http://wptrafficanalyzer.in/blog/drawing-driving-route-directions-between-two-locations-using-google-directions-in-google-map-android-api-v2/
 * https://github.com/googlesamples/android-play-places
+* https://github.com/amalChandran/google-maps-route-animation
 
 ## License
 GO-JAY prototype makes use of the [GNU GPL v3.0](http://choosealicense.com/licenses/gpl-3.0/) license. Remember to make public your project source code when reusing GO-JAY code.
