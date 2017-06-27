@@ -16,13 +16,16 @@ import ai.agusibrahim.brojekdemo.Helper.*;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.GoogleMap.*;
 import android.animation.*;
+import android.widget.RadioButton;
+import android.widget.CompoundButton;
 
-public class TariffView extends FrameLayout
+public class TariffView extends FrameLayout implements CompoundButton.OnCheckedChangeListener
 {
 	TextView jarak, oldprice,lowprice,normprice,reload;
 	private View v, myLoc, jarakBar, rootv;
 	public static int myHeight=0;
 	public static int[] jarakBarHeight=new int[2];
+	private RadioButton rb1, rb2;
 	private GoogleMap.OnMyLocationButtonClickListener callmyloc;
 	public TariffView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -44,6 +47,8 @@ public class TariffView extends FrameLayout
 		normprice=(TextView) v.findViewById(R.id.tariffviewNormalPrice);
 		lowprice=(TextView) v.findViewById(R.id.tariffviewLowPrice);
 		reload=(TextView) v.findViewById(R.id.tariffviewReload);
+		rb1=(RadioButton) v.findViewById(R.id.sbRadioButton1);
+		rb2=(RadioButton) v.findViewById(R.id.sbRadioButton2);
 		jarakBar=v.findViewById(R.id.tariffviewLinearLayout1);
 		myLoc=v.findViewById(R.id.tariffviewMyLoc);
 		rootv=v.findViewById(R.id.tariffviewLinearLayout2);
@@ -60,7 +65,18 @@ public class TariffView extends FrameLayout
 					myHeight=getHeight();
 				}
 			});
+		rb1.setOnCheckedChangeListener(this);
+		rb2.setOnCheckedChangeListener(this);
+		rb2.setChecked(true);
 		addView(v);
+	}
+	@Override
+	public void onCheckedChanged(CompoundButton p1, boolean p2) {
+		if(rb1==p1&&p2){
+			rb2.setChecked(false);
+		}else if(rb2==p1&&p2){
+			rb1.setChecked(false);
+		}
 	}
 	public void setJarak(String s){
 		jarak.setText(s);
